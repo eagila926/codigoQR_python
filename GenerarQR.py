@@ -18,7 +18,7 @@ resultados = cursor.fetchall()
 # Generar códigos QR para cada registro en la base de datos
 for fila in resultados:
     # Crear el contenido del código QR a partir de los datos de la fila
-    contenido = f"identificacion: {fila[0]}, nombre: {fila[1]}, telefono: {fila[2]}, correo: {fila[3]}"
+    contenido = f"identificacion: {fila[0]}, nombre: {fila[1]}, telefono: {fila[2]}, correo: {fila[3]}, asistencia: {fila[4]}"
     
     # Crear el código QR
     qr = qrcode.QRCode(version=1, box_size=10, border=5)
