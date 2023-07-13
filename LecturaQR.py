@@ -32,6 +32,7 @@ def leer_codigo_qr():
             #Convertir el contenido en estring
             dataqr= str(codigo_qr[0])
            
+            #Identificar posiciones para separar cada dato del codigo QR
             caracteres_search =[":",","]
 
             posiciones =[]
@@ -70,6 +71,8 @@ def leer_codigo_qr():
 
             # Registrar el código QR y la hora de lectura en la base de datos
             registrar_lectura_qr(contenido, hora_lectura)
+
+            #Realizar una pausa para que se guarde en la base y hacer la validacion con datos actualizados
 
             pausa = True
             tiempo_pausa = 2
