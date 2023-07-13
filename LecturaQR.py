@@ -14,6 +14,12 @@ def leer_codigo_qr():
         # Leer un fotograma de la cámara
         _, frame = cap.read()
 
+        #ubicar el codigo QR
+        cv2.putText(frame, 'Localizar codigo QR', (160,80), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0),2)
+
+        #Ubicar rectangulo en las zona
+        cv2.rectangle(frame, (170,100),(470,400),(0,255,0),2)
+
         # Decodificar los códigos QR presentes en el fotograma
         codigos_qr = pyzbar.decode(frame)
 
@@ -21,20 +27,43 @@ def leer_codigo_qr():
         for codigo_qr in codigos_qr:
             # Obtener el contenido del código QR
             contenido = codigo_qr.data.decode("utf-8")
+            
 
-            dataqr= codigo_qr[0]
-            identificacion = dataqr[0]
-            nombre = dataqr[1]
-            telefono = dataqr[2]
-            correo = dataqr[3]
-            asistencia = dataqr[4]
+            #Convertir el contenido en estring
+            dataqr= str(codigo_qr[0])
+           
+            caracteres_search =[":",","]
 
-            print("campo1", identificacion)
-            print("campo2",nombre)
-            print("campo3",telefono)
-            print("campo4",correo)
-            print("campo5",asistencia)
+            posiciones =[]
 
+            for i in range(len(dataqr)):
+                if dataqr[i] in caracteres_search:
+                    posiciones.append(i)
+
+            print("Los caracteres buscados se encuentran en las posiciones:")
+            for posicion in posiciones:
+                print(posicion)
+
+            #Valores para crear el rango y separar el string
+            var1, var2, var3, var4, var5, var6, var7, var8, var9 = posiciones
+
+            print("Variable", var1)
+
+
+            identificacion = dataqr[(var1+2):(var2)]
+            print("Identificacion",identificacion)
+
+            nombre = dataqr[(var3+2):(var4)]
+            print("Nombre",nombre)
+
+            telefono = dataqr[(var5+2):(var6)]
+            print("Telefono",telefono)
+
+            correo = dataqr[(var7+2):(var8)]
+            print("Correo",correo)
+
+            asistencia = dataqr[(var9+2):(len(dataqr)-1)]
+            print("Asistencia",asistencia)
 
             # Obtener la hora actual
             hora_lectura = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
