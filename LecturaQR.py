@@ -63,8 +63,9 @@ def leer_codigo_qr():
             correo = dataqr[(var7+2):(var8)]
             print("Correo",correo)
 
-            asistencia = dataqr[(var9+2):(len(dataqr)-1)]
-            print("Asistencia",asistencia)
+            #Sacar el dia de la semana 
+            diasem = datetime.today().weekday()
+            print(diasem)
 
             # Obtener la hora actual
             hora_lectura = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -105,7 +106,7 @@ def leer_codigo_qr():
     cv2.destroyAllWindows()
     
 # Función para registrar la lectura del código QR en la base de datos
-def registrar_lectura_qr(contenido, hora_lectura):
+def registrar_lectura_qr(identificacion, nombre, hora_lectura):
     try:
         # Conectar a la base de datos MySQL
         conexion = mysql.connector.connect(
@@ -118,8 +119,8 @@ def registrar_lectura_qr(contenido, hora_lectura):
         if conexion.is_connected():
             # Insertar los datos en la tabla de la base de datos
             cursor = conexion.cursor()
-            consulta = "INSERT INTO lecturas_qr (contenido, hora_lectura) VALUES (%s, %s)"
-            datos = (contenido, hora_lectura)
+            consulta = "INSERT INTO lecturas_qr (contenido, nombre, dia_uno) VALUES (%s, %s, %s)"
+            datos = (identificacion, nombre, hora_lectura)
             cursor.execute(consulta, datos)
             conexion.commit()
             cursor.close()
