@@ -80,7 +80,7 @@ label_correo.pack()
 entry_correo = tk.Entry(ventana)
 entry_correo.pack()
 
-label_telefono = tk.Label(ventana, text="Teléfono:")
+label_telefono = tk.Label(ventana, text="Telefono:")
 label_telefono.pack()
 entry_telefono = tk.Entry(ventana)
 entry_telefono.pack()
