@@ -5,7 +5,6 @@ from pyzbar import pyzbar
 import mysql.connector
 from mysql.connector import Error
 from datetime import datetime
-import time
 
 def generar_codigo_qr():
     # Obtener la información ingresada en el formulario
@@ -36,6 +35,7 @@ def generar_codigo_qr():
     label_qr.pack()
 
     registrar_clientes_qr(identificacion, nombre, telefono, correo)
+    limpiar_form()
     
 
 def limpiar_form():
@@ -44,10 +44,6 @@ def limpiar_form():
     entry_telefono.delete(0, tk.END)
     entry_correo.delete(0, tk.END)
     print("Formulario limpio")
-
-def ejecutar_funciones():
-    generar_codigo_qr()
-    limpiar_form()
 
 
 def registrar_clientes_qr(identificacion, nombre, telefono, correo):
@@ -104,7 +100,7 @@ entry_correo.pack()
 
 
 
-boton_generar_qr = tk.Button(ventana, text="Generar Código QR", command= ejecutar_funciones )
+boton_generar_qr = tk.Button(ventana, text="Generar Código QR", command= generar_codigo_qr )
 boton_generar_qr.pack()
 
 
