@@ -13,6 +13,9 @@ def generar_codigo_qr():
     nombre = entry_nombre.get()
     direccion = entry_correo.get()
     telefono = entry_telefono.get()
+    correo = entry_correo.get()
+
+    
 
     # Crear el contenido del código QR
     contenido_qr = f"Identificacion: {identificacion}, Nombre: {nombre}, Telefono: {telefono}, Correo: {direccion}"
@@ -32,8 +35,22 @@ def generar_codigo_qr():
     label_qr = tk.Label(ventana_qr, image=imagen_qr_tk)
     label_qr.pack()
 
+    registrar_clientes_qr(identificacion, nombre, telefono, correo)
     
-def registrar_lectura_qr(identificacion, nombre, hora_lectura):
+
+def limpiar_form():
+    entry_identificacion.delete(0, tk.END)
+    entry_nombre.delete(0, tk.END)
+    entry_telefono.delete(0, tk.END)
+    entry_correo.delete(0, tk.END)
+    print("Formulario limpio")
+
+def ejecutar_funciones():
+    generar_codigo_qr()
+    limpiar_form()
+
+
+def registrar_clientes_qr(identificacion, nombre, telefono, correo):
     try:
         # Conectar a la base de datos MySQL
         conexion = mysql.connector.connect(
@@ -46,8 +63,8 @@ def registrar_lectura_qr(identificacion, nombre, hora_lectura):
         if conexion.is_connected():
             # Insertar los datos en la tabla de la base de datos
             cursor = conexion.cursor()
-            consulta = "INSERT INTO lecturas_qr (contenido, nombre, dia_uno) VALUES (%s, %s, %s)"
-            datos = (identificacion, nombre, hora_lectura)
+            consulta = "INSERT INTO clientes (identificacion, nombre, telefono, correo) VALUES (%s, %s, %s, %s)"
+            datos = (identificacion, nombre, telefono, correo)
             cursor.execute(consulta, datos)
             conexion.commit()
             cursor.close()
@@ -87,8 +104,9 @@ entry_correo.pack()
 
 
 
-boton_generar_qr = tk.Button(ventana, text="Generar Código QR", command=generar_codigo_qr)
+boton_generar_qr = tk.Button(ventana, text="Generar Código QR", command= ejecutar_funciones )
 boton_generar_qr.pack()
+
 
 # Iniciar el bucle principal de la aplicación
 ventana.mainloop()
