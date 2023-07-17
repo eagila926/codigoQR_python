@@ -15,7 +15,7 @@ def generar_codigo_qr():
     telefono = entry_telefono.get()
 
     # Crear el contenido del código QR
-    contenido_qr = f"Identificacion: {identificacion}\"\"Nombre: {nombre}\"\"Correo: {direccion}\"\nTeléfono: {telefono}"
+    contenido_qr = f"Identificacion: {identificacion}, Nombre: {nombre}, Telefono: {telefono}, Correo: {direccion}"
 
     # Generar el código QR
     qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_H, box_size=10, border=4)
@@ -70,20 +70,22 @@ label_identificacion.pack()
 entry_identificacion = tk.Entry(ventana)
 entry_identificacion.pack()
 
-label_nombre = tk.Label(ventana, text="Nombre:")
+label_nombre = tk.Label(ventana, text="Nombre: ")
 label_nombre.pack()
 entry_nombre = tk.Entry(ventana)
 entry_nombre.pack()
 
-label_correo = tk.Label(ventana, text="Correo:")
+label_telefono = tk.Label(ventana, text="Telefono: ")
+label_telefono.pack()
+entry_telefono = tk.Entry(ventana)
+entry_telefono.pack()
+
+label_correo = tk.Label(ventana, text="Correo: ")
 label_correo.pack()
 entry_correo = tk.Entry(ventana)
 entry_correo.pack()
 
-label_telefono = tk.Label(ventana, text="Telefono:")
-label_telefono.pack()
-entry_telefono = tk.Entry(ventana)
-entry_telefono.pack()
+
 
 boton_generar_qr = tk.Button(ventana, text="Generar Código QR", command=generar_codigo_qr)
 boton_generar_qr.pack()

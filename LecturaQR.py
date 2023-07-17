@@ -46,7 +46,7 @@ def leer_codigo_qr():
                 print(posicion)
 
             #Valores para crear el rango y separar el string
-            var1, var2, var3, var4, var5, var6, var7, var8, var9 = posiciones
+            var1, var2, var3, var4, var5, var6, var7, var8 = posiciones
 
             print("Variable", var1)
 

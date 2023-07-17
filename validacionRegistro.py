@@ -49,13 +49,13 @@ def validarExistencia():
                 print(posicion)
 
             #Valores para crear el rango y separar el string
-            var1, var2, var3, var4, var5, var6, var7, var8, var9 = posiciones
+            var1, var2, var3, var4, var5, var6, var7 = posiciones
 
 
             identificacion = dataqr[(var1+2):(var2)]
             nombre = dataqr[(var3+2):(var4)]
             telefono = dataqr[(var5+2):(var6)]
-            correo = dataqr[(var7+2):(var8)]
+            correo = dataqr[(var7+2):(len(dataqr)-1)]
             
             # Obtener la hora actual
             hora_lectura = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -68,7 +68,7 @@ def validarExistencia():
             diasem = datetime.today().weekday()
             print(diasem)
 
-            if 4 == diasem:
+            if 0 == diasem:
                 
                 #registrar_lectura_qr(identificacion, nombre, hora_lectura)
                 conexion = mysql.connector.connect(
